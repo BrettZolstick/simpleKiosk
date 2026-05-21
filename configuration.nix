@@ -90,7 +90,7 @@ in
       "host_permissions": ["<all_urls>"],
       "content_scripts": [
         {
-          "matches": ["<all_urls>"],
+          "matches": ["*"],
           "js": ["activity.js"],
           "run_at": "document_idle",
           "all_frames": true
