@@ -90,7 +90,7 @@ in
       "host_permissions": ["<all_urls>"],
       "content_scripts": [
         {
-          "matches": ["*"],
+          "matches": ["https://*.lingscars.com/*", "https://lingscars.com/*"],
           "js": ["activity.js"],
           "run_at": "document_idle",
           "all_frames": true
