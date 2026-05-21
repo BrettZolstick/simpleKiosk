@@ -70,6 +70,7 @@ in
     weston
     git
     yazi
+    bat
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
