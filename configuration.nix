@@ -2,6 +2,8 @@
 let
 
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
+    ${pkgs.wayidle}/bin/wayidle timeout 10 'pkill chromium' &
+    
     ${pkgs.chromium}/bin/chromium \
     --ozone-platform=wayland \
     --no-first-run \
@@ -72,6 +74,7 @@ in
     git
     yazi
     bat
+    wayidle
   ];
 
   environment.shellAliases = {
