@@ -161,7 +161,10 @@ in
       "touchstart",
       "scroll"
     ].forEach(eventName => {
-      window.addEventListener(eventName, reportActivity, true);
+      window.addEventListener(eventName, reportActivity, {
+        capture: true,
+        passive; true
+      });
     });
 
     reportActivity();    
