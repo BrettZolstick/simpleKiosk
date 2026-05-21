@@ -1,16 +1,19 @@
 { config, pkgs, ... }:
 let
-
+  homeURL = "https://museum.lingscars.com"; # the page the kiosk load
+  idleSeconds = 15; # idle time in seconds before the kiosk resets
+  
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
-    ${pkgs.chromium}/bin/chromium \
+    exec ${pkgs.chromium}/bin/chromium \
     --ozone-platform=wayland \
     --no-first-run \
     --disable-infobars \
     --disable-session-crashed-bubble \
     --disable-features=Translate \
     --start-fullscreen \
-    --incognito \
-    --app=https://museum.lingscars.com
+    --load-extension=/etc/kiosk-extension \
+    --disable-extensions-except=/etc/kiosk-extension \
+    --app=${homeURL}
   '';
 
 in
@@ -43,7 +46,7 @@ in
     settings = {
       default_session = {
         user = "kiosk";
-        command = "${pkgs.weston}/bin/weston --idle-time=10 --shell=kiosk-shell.so -- ${startKiosk}";
+        command = "${pkgs.weston}/bin/weston --shell=kiosk-shell.so -- ${startKiosk}";
       };
     };
   };
@@ -61,6 +64,8 @@ in
   };
 
   users.users.root.initialPassword = ""; # enables passwordless root
+  # ^ before production, change this to a hashed password that we can safely store in the public repo
+  #   then we can distribute the un-hashed password to the facilities as needed
 
   environment.systemPackages = with pkgs; [
     tree
@@ -73,6 +78,52 @@ in
     yazi
     bat
   ];
+
+
+  # Make a chrome extenion to handle idle behavior
+  environment.etc."kiosk-extension/manifest.json".text = ''
+    {
+      "manifest_version": 3,
+      "name": "Kiosk Idle Handler",
+      "version": "1.0",
+      "incognito": "split",
+      "permissions": ["idle","tabs","browsingData"],
+      "background":{
+        "service_worker":"background.js"
+      }
+    }    
+  '';
+  environment.etc."kiosk-extension/background.js".text = ''
+    
+    chrome.idle.setDetectionInterval(${idleSeconds});
+    chrome.idle.onStateChanged.addListener(async (state) => {
+      if (state !== "idle") return;
+
+      // if state changes to idle, run the following:
+
+      // clear all browsing data
+      await chrome.browsingData.remove({since:0},{
+        cookies: true,
+        cache: true,
+        localStorage: true,
+        indexedDB: true,
+        serviceWorkers: true
+      });
+
+      // close all tabs and go back to homeURL
+      const tabs = await chrome.tabs.query({});
+      const mainTab = tabs[0];
+      for (const tab of tabs.slice(1)) {
+        chrome.tabs.remove(tab.id);
+      }
+      chrome.tabs.update(mainTab.id, {url: "${homeURL}" });
+
+      
+    });
+  '';
+
+  
+
 
   environment.shellAliases = {
     kiosk-update = "nixos-rebuild switch --flake github:BrettZolstick/simpleKiosk#kiosk --impure --refresh";
