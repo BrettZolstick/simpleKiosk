@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   homeURL = "https://museum.lingscars.com"; # the page the kiosk load
-  idleSeconds = "15"; # idle time in seconds before the kiosk resets
+  idleSeconds = 15; # idle time in seconds before the kiosk resets
   
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
     exec ${pkgs.chromium}/bin/chromium \
@@ -87,43 +87,56 @@ in
       "version": "1.0",
       "incognito": "split",
       "permissions": ["idle","tabs","browsingData"],
+      "content_scripts": [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["activity.js"],
+          "run_at": "document_start",
+          "all_frames": true
+        }
+      ],
       "background":{
         "service_worker":"background.js"
       }
     }    
   '';
   environment.etc."kiosk-extension/background.js".text = ''
-
-    console.log("kiosk extension loaded")
-    console.log("idle state:" state)
     
-    chrome.idle.setDetectionInterval(${idleSeconds});
-    chrome.idle.onStateChanged.addListener(async (state) => {
-      if (state !== "idle") return;
+    let timer = null; 
 
-      // if state changes to idle, run the following:
+    function resetTimer() {
+      clearTimeout(timer);
 
-      // clear all browsing data
-      await chrome.browsingData.remove({since:0},{
-        cookies: true,
-        cache: true,
-        localStorage: true,
-        indexedDB: true,
-        serviceWorkers: true
-      });
+      timer = setTimeout(async () => {
+        await chrome.browsingData.remove({
+          since: 0
+        }, {
+          cookies: true,
+          cache: true,
+          localStorage: true,
+          indexedDB: true,
+          serviceWorkers: true
+        });
 
-      // close all tabs and go back to homeURL
-      const tabs = await chrome.tabs.query({});
-      const mainTab = tabs[0];
-      for (const tab of tabs.slice(1)) {
-        chrome.tabs.remove(tab.id);
+        const tabs = await chrome.tabs.query({});
+        const mainTab = tabs[0];
+
+        for (const tab of tabs.slice(1)) {
+          chrome.tabs.remove(tab.id);
+        }
+
+        chrome.tabs.update(mainTab.id, { url: ${homeURL}});
+      }, ${idleSeconds} * 1000);
+    }
+
+    chrome.runtime.onMessage.addListener((message) => {
+      if (message.type === "activity") {
+        resetTimer();
       }
-      chrome.tabs.update(mainTab.id, {url: "${homeURL}" });
-
-      
     });
-  '';
 
+    resetTimer();
+  '';
   
 
 
