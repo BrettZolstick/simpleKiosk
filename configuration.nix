@@ -131,14 +131,17 @@ in
 
     chrome.runtime.onMessage.addListener((message) => {
       if (message.type === "activity") {
+        console.log("timer reset");
         resetTimer();
       }
     });
 
+    console.log("initial timer reset");
     resetTimer();
   '';
   environment.etc."kiosk-extension/activity.js".text = ''
     function reportActivity() {
+      console.log("activity detected");
       chrome.runtime.sendMessage({ type: "activity" });
     }
 
