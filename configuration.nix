@@ -125,7 +125,7 @@ in
           chrome.tabs.remove(tab.id);
         }
 
-        chrome.tabs.update(mainTab.id, { url: ${homeURL}});
+        chrome.tabs.update(mainTab.id, { url: "${homeURL}"});
       }, ${idleSeconds} * 1000);
     }
 
