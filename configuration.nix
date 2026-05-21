@@ -78,6 +78,7 @@ in
     micro
     weston
     git
+    yazi
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
