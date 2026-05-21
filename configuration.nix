@@ -64,6 +64,7 @@ in
   environment.systemPackages = with pkgs; [
     tree
     btop
+    fastfetch
     helix
     micro
     weston
@@ -71,6 +72,10 @@ in
     yazi
     bat
   ];
+
+  environment.shellAliases = {
+    kiosk-update = "nixos-rebuild switch --flake github:BrettZolstick/simpleKiosk#kiosk --impure --refresh";
+  };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
