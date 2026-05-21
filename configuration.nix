@@ -13,7 +13,7 @@ let
     --start-fullscreen \
     --load-extension=/etc/kiosk-extension \
     --disable-extensions-except=/etc/kiosk-extension \
-    --app=${homeURL}
+    ${homeURL}
   '';
 
 in
