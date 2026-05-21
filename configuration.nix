@@ -93,6 +93,9 @@ in
     }    
   '';
   environment.etc."kiosk-extension/background.js".text = ''
+
+    console.log("kiosk extension loaded")
+    console.log("idle state:" state)
     
     chrome.idle.setDetectionInterval(${idleSeconds});
     chrome.idle.onStateChanged.addListener(async (state) => {
