@@ -87,6 +87,7 @@ in
       "version": "1.0",
       "incognito": "split",
       "permissions": ["idle","tabs","browsingData"],
+      "host_permissions": ["<all_urls>"],
       "content_scripts": [
         {
           "matches": ["<all_urls>"],
@@ -148,6 +149,10 @@ in
         }
       });
     }
+
+
+    console.log("activity.js loaded")
+    document.body.style.outline = "10px solid red";
 
     [
       "mousemove",
