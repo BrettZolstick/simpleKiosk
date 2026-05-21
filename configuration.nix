@@ -91,7 +91,7 @@ in
         {
           "matches": ["<all_urls>"],
           "js": ["activity.js"],
-          "run_at": "document_start",
+          "run_at": "document_idle",
           "all_frames": true
         }
       ],
@@ -142,7 +142,11 @@ in
   environment.etc."kiosk-extension/activity.js".text = ''
     function reportActivity() {
       console.log("activity detected");
-      chrome.runtime.sendMessage({ type: "activity" });
+      chrome.runtime.sendMessage({ type: "activity" }, () => {
+        if (chrome.runtime.lastError) {
+          console.log("sendMessage error:", chrome.runtime.lastError.message);
+        }
+      });
     }
 
     [
