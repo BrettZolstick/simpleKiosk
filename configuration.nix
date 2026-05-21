@@ -137,6 +137,23 @@ in
 
     resetTimer();
   '';
+  environment.etc."kiosk-extension/activity.js".text = ''
+    function reportActivity() {
+      chrome.runtime.sendMessage({ type: "activity" });
+    }
+
+    [
+      "mousemove",
+      "mousedown",
+      "keydown",
+      "touchstart",
+      "scroll"
+    ].forEach(eventName => {
+      window.addEventListener(eventName, reportActivity, true);
+    });
+
+    reportActivity();    
+  '';
   
 
 
