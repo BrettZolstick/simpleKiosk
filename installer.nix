@@ -41,7 +41,7 @@
       mkdir -p /mnt/etc/nixos 
       cp -r /iso/simpleKiosk /mnt/etc/nixos/simpleKiosk # make a local copy of the entire flake on the target machine
       nixos-generate-config --root /mnt --dir /mnt/etc/nixos # generate the dan gum hardware-configuration.nix on the target machine 
-      nixos-install --flake /mnt/etc/nixos/simpleKiosk#kiosk --no-root-passwd # install from the local flake
+      nixos-install --flake /mnt/etc/nixos/simpleKiosk#kiosk --no-root-passwd --impure# install from the local flake
 
       # Reboot
       echo ""
