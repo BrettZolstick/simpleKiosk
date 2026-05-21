@@ -9,6 +9,7 @@ let
     --disable-session-crashed-bubble \
     --disable-features=Translate \
     --start-fullscreen \
+    --incognito \
     --app=https://museum.lingscars.com
   '';
 
