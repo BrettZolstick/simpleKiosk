@@ -12,7 +12,6 @@ let
     --disable-features=Translate \
     --start-fullscreen \
     --load-extension=/etc/kiosk-extension \
-    --disable-extensions-except=/etc/kiosk-extension \
     ${homeURL}
   '';
 
