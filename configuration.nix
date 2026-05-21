@@ -64,7 +64,6 @@ in
   environment.systemPackages = with pkgs; [
     tree
     btop
-    fastfetch
     helix
     micro
     weston
