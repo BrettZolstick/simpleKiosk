@@ -12,15 +12,6 @@ let
     --app=https://museum.lingscars.com
   '';
 
-  westonIni = pkgs.writeText "weston.ini" ''
-    [core]
-    idle-time=0
-    
-    [shell]
-    locking=false
-    panel-position=none    
-  '';
-
 in
 {
   imports = [
