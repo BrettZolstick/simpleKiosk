@@ -54,7 +54,7 @@ in
   environment.etc."chromium/policies/managed/kiosk-policy.json".text = builtins.toJSON {
     URLBlocklist = [ "*" ];
     URLAllowlist = [
-      "lingscars.com"
+      "*"
     ];
   };
   
