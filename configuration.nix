@@ -12,6 +12,7 @@ let
       --disable-features=Translate \
       --start-fullscreen \
       --incognito \
+      --kiosk \
       --app=${homeURL}
     done
   '';
