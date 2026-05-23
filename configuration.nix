@@ -44,7 +44,7 @@ in
   boot.plymouth = {
     enable = true;
     theme = "bgrt";
-    logo = ./resources/funnyPenguin.jpg;
+    logo = ./resources/funnyPenguin.png; # must be a png
   };
   boot.kernelParams = [
     "quiet"
