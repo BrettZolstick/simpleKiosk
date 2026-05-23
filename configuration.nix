@@ -13,11 +13,18 @@ let
     ${homeURL}
   '';
 
+  swayConfig = pkgs.writeText "sway-kiosk-config" ''
+    output * bg #000000 solid_color
+    default_border none
+    default_floating_border none
+    seat * hide_cursor 3000
+    exec ${startKiosk}    
+  '';
+
 in
 {
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ./resources/idle.nix
   ];
 
   boot.loader.timeout = 0;
@@ -44,10 +51,15 @@ in
     settings = {
       default_session = {
         user = "kiosk";
-        command = "";
+        command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --config ${swayConfig}";
       };
     };
   };
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  }
 
   # Set Chrome URL Whitelist
   environment.etc."chromium/policies/managed/kiosk-policy.json".text = builtins.toJSON {
