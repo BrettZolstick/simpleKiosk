@@ -59,7 +59,7 @@ in
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
-  }
+  };
 
   # Set Chrome URL Whitelist
   environment.etc."chromium/policies/managed/kiosk-policy.json".text = builtins.toJSON {
