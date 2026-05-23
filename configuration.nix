@@ -18,7 +18,7 @@ let
 
 
   blackScreen = pkgs.writeShellScript "black-screen" ''
-    exec runuser -u kiosk -- foot \
+    kiosk -- foot \
       --fullscreen \
       --override=colors.background=000000 \
       --override=colors.foreground=000000 \
@@ -33,7 +33,7 @@ let
     workspace 1
     exec ${startKiosk}
     exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2' resume 'pkill chromium; swaymsg workspace 1'
-    workspace2
+    workspace 2
     exec ${blackScreen}
   '';
 
