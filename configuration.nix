@@ -10,7 +10,6 @@ let
     --disable-session-crashed-bubble \
     --disable-features=Translate \
     --start-fullscreen \
-    --load-extension=/etc/kiosk-extension \
     ${homeURL}
   '';
 

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   idleWatcher = pkgs.writeShellScript "kiosk-idle-watcher" ''
