@@ -23,8 +23,9 @@ let
     seat * hide_cursor 3000
     workspace 1
     exec ${startKiosk}
-    exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2' resume 'pkill chromium; sleep 250; swaymsg workspace 1'
     workspace 2
+    workspace 1
+    exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2' resume 'pkill chromium; sleep 250; swaymsg workspace 1'
   '';
 
 
