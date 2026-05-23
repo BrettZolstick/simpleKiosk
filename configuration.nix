@@ -21,11 +21,8 @@ let
     default_border none
     default_floating_border none
     seat * hide_cursor 3000
-    workspace 1
     exec ${startKiosk}
-    workspace 2
-    workspace 1
-    exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2; swaymsg "output * power off"' resume 'pkill chromium; sleep 250; swaymsg workspace 1 ; swaymsg "output power on"'
+    exec swayidle -w timeout ${idleTimeout} 'swaymsg "output * power off"' resume 'pkill chromium; swaymsg "output * power on"'
   '';
 
 
