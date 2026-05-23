@@ -4,7 +4,7 @@ let
   
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
     while true; do
-      exec ${pkgs.chromium}/bin/chromium \
+      ${pkgs.chromium}/bin/chromium \
       --ozone-platform=wayland \
       --no-first-run \
       --disable-infobars \
