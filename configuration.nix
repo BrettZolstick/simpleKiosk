@@ -31,7 +31,7 @@ let
     default_floating_border none
     seat * hide_cursor 3000
     exec ${startKiosk}
-    exec swayidle -w timeout ${idleTimeout} '${blackScreen}' resume 'pkill chromium'
+    exec swayidle -w timeout ${idleTimeout} 'echo test' resume 'pkill chromium'
   '';
 
 
