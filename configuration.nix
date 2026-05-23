@@ -18,7 +18,7 @@ let
 
 
   blackScreen = pkgs.writeShellScript "black-screen" ''
-    exec ${pkgs.foot}/bin/foot \
+    exec foot \
       --fullscreen \
       --override=colors.background=000000 \
       --override=colors.foreground=000000 \
@@ -103,6 +103,7 @@ in
     bat
     swayidle
     swaylock
+    foot
   ];
 
 
