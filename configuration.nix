@@ -18,7 +18,7 @@ let
 
 
   blackScreen = pkgs.writeShellScript "black-screen" ''
-    exec foot \
+    exec runuser -u kiosk -- foot \
       --fullscreen \
       --override=colors.background=000000 \
       --override=colors.foreground=000000 \
