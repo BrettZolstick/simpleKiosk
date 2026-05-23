@@ -10,7 +10,8 @@ let
     --disable-session-crashed-bubble \
     --disable-features=Translate \
     --start-fullscreen \
-    ${homeURL}
+    --incognito \
+    --app=${homeURL}
   '';
 
   swayConfig = pkgs.writeText "sway-kiosk-config" ''
