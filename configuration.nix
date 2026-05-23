@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   homeURL = "https://museum.lingscars.com"; # the page the kiosk load
-  
+  idleTimeout = "10";
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
     while true; do
       ${pkgs.chromium}/bin/chromium \
@@ -21,7 +21,10 @@ let
     default_border none
     default_floating_border none
     seat * hide_cursor 3000
-    exec ${startKiosk}    
+    exec ${startKiosk}
+    exec swayidle -w \
+      timeout  ${idleTimeout} 'swaylock' -f -c 000000 \
+      resume 'pkill chromium; pkill swaylock'
   '';
 
 in
@@ -89,7 +92,8 @@ in
     git
     yazi
     bat
-    ddcutil
+    swayidle
+    swaylock
   ];
 
 
