@@ -44,7 +44,7 @@ in
     settings = {
       default_session = {
         user = "kiosk";
-        command = "${pkgs.weston}/bin/weston --shell=kiosk-shell.so -- ${startKiosk}";
+        command = "";
       };
     };
   };
@@ -71,7 +71,6 @@ in
     fastfetch
     helix
     micro
-    weston
     git
     yazi
     bat
