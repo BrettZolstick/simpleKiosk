@@ -43,8 +43,17 @@ in
   };
   boot.plymouth = {
     enable = true;
-    theme = "Fade-in";
-    #logo = ./resources/funnyPenguin.png; # must be a png
+    # theme = "catpuccin-frappe";
+    # theme = "details";
+    # theme = "fade-in";
+    # theme = "glow";
+    # theme = "script";
+    # theme = "solar";
+    # theme = "spinfinity";
+    # theme = "spinner";
+    # theme = "text";
+    # theme = "tribar";
+    # logo = ./resources/funnyPenguin.png; # must be a png
   };
   boot.kernelParams = [
     "quiet"
