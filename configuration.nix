@@ -22,7 +22,7 @@ let
       --fullscreen \
       --override=colors.background=000000 \
       --override=colors.foreground=000000 \
-      sh -c 'while true; do sleep 500; done'    
+      sh -c 'while true; do sleep 1000; done'    
   '';
 
   swayConfig = pkgs.writeText "sway-kiosk-config" ''
@@ -31,7 +31,7 @@ let
     default_floating_border none
     seat * hide_cursor 3000
     exec ${startKiosk}
-    exec swayidle -w timeout ${idleTimeout} '${blackScreen}' resume 'pkill chromium; pkill -f black-screenb'
+    exec swayidle -w timeout ${idleTimeout} '${blackScreen}' resume 'pkill chromium; pkill -f black-screen'
   '';
 
 
