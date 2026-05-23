@@ -16,14 +16,25 @@ let
     done
   '';
 
+
+  blackScreen = pkgs.writeShellScript "black-screen" ''
+    exec ${pkgs.foot}/bin/foot \
+      --fullscreen \
+      --override=colors.background=000000 \
+      --override=colors.foreground=000000 \
+      sh -c 'while true; do sleep 500; done'    
+  '';
+
   swayConfig = pkgs.writeText "sway-kiosk-config" ''
     output * bg #000000 solid_color
     default_border none
     default_floating_border none
     seat * hide_cursor 3000
     exec ${startKiosk}
-    exec swayidle -w timeout ${idleTimeout} 'swaylock -f -c 000000' resume 'pkill chromium; pkill swaylock'
+    exec swayidle -w timeout ${idleTimeout} '${blackScreen}' resume 'pkill chromium; pkill -f black-screenb'
   '';
+
+
 
 in
 {
