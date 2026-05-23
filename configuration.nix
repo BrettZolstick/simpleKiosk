@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   homeURL = "https://museum.lingscars.com"; # the page the kiosk load
-  idleSeconds = "15"; # idle time in seconds before the kiosk resets
   
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
     exec ${pkgs.chromium}/bin/chromium \
@@ -19,6 +18,7 @@ in
 {
   imports = [
     /etc/nixos/hardware-configuration.nix
+    ./resources/idle.nix
   ];
 
   boot.loader.timeout = 0;
