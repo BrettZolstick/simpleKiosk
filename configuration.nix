@@ -22,9 +22,7 @@ let
     default_floating_border none
     seat * hide_cursor 3000
     exec ${startKiosk}
-    exec swayidle -w \
-      timeout  ${idleTimeout} 'swaylock' -f -c 000000 \
-      resume 'pkill chromium; pkill swaylock'
+    exec swayidle -w timeout  ${idleTimeout} 'swaylock' -f -c 000000 resume 'pkill chromium; pkill swaylock'
   '';
 
 in
