@@ -16,15 +16,6 @@ let
     done
   '';
 
-
-  blackScreen = pkgs.writeShellScript "black-screen" ''
-    kiosk -- foot \
-      --fullscreen \
-      --override=colors.background=000000 \
-      --override=colors.foreground=000000 \
-      sh -c 'while true; do sleep 1000; done'    
-  '';
-
   swayConfig = pkgs.writeText "sway-kiosk-config" ''
     output * bg #000000 solid_color
     default_border none
@@ -32,7 +23,7 @@ let
     seat * hide_cursor 3000
     workspace 1
     exec ${startKiosk}
-    exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2' resume 'pkill chromium; swaymsg workspace 1'
+    exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2' resume 'pkill chromium; sleep 250; swaymsg workspace 1'
     workspace 2
     exec ${blackScreen}
   '';
@@ -105,8 +96,6 @@ in
     yazi
     bat
     swayidle
-    swaylock
-    foot
   ];
 
 
