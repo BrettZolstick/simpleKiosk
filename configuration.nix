@@ -44,7 +44,13 @@ in
   boot.plymouth = {
     enable = true;
     theme = "bgrt";
+    logo = ./resources/funnyPenguin.jpg;
   };
+  boot.kernelParams = [
+    "quiet"
+    "udev.log_level=3"
+    "systemd.show_status=auto"
+  ];
   boot.initrd.verbose = false;
   boot.consoleLogLevel = 0;
 
