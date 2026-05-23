@@ -75,6 +75,7 @@ in
     git
     yazi
     bat
+    ddcutil
   ];
 
 
