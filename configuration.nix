@@ -25,7 +25,6 @@ let
     exec ${startKiosk}
     exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2' resume 'pkill chromium; sleep 250; swaymsg workspace 1'
     workspace 2
-    exec ${blackScreen}
   '';
 
 
