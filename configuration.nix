@@ -43,7 +43,7 @@ in
   };
   boot.plymouth = {
     enable = true;
-    theme = "bgrt";
+    theme = "spinner";
     logo = ./resources/funnyPenguin.png; # must be a png
   };
   boot.kernelParams = [
