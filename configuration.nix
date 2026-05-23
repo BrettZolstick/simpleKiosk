@@ -30,8 +30,11 @@ let
     default_border none
     default_floating_border none
     seat * hide_cursor 3000
+    workspace 1
     exec ${startKiosk}
-    exec swayidle -w timeout ${idleTimeout} '${blackScreen}' resume 'swaymsg kill; pkill chromium'
+    exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2' resume 'pkill chromium; swaymsg workspace 1'
+    workspace2
+    exec ${blackScreen}
   '';
 
 
