@@ -25,7 +25,7 @@ let
     exec ${startKiosk}
     workspace 2
     workspace 1
-    exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2' resume 'pkill chromium; sleep 250; swaymsg workspace 1'
+    exec swayidle -w timeout ${idleTimeout} 'swaymsg workspace 2; swaymsg "output * power off"' resume 'pkill chromium; sleep 250; swaymsg workspace 1 ; swaymsg "output power on"'
   '';
 
 
