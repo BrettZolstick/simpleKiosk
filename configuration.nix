@@ -3,15 +3,17 @@ let
   homeURL = "https://museum.lingscars.com"; # the page the kiosk load
   
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
-    exec ${pkgs.chromium}/bin/chromium \
-    --ozone-platform=wayland \
-    --no-first-run \
-    --disable-infobars \
-    --disable-session-crashed-bubble \
-    --disable-features=Translate \
-    --start-fullscreen \
-    --incognito \
-    --app=${homeURL}
+    while true; do
+      exec ${pkgs.chromium}/bin/chromium \
+      --ozone-platform=wayland \
+      --no-first-run \
+      --disable-infobars \
+      --disable-session-crashed-bubble \
+      --disable-features=Translate \
+      --start-fullscreen \
+      --incognito \
+      --app=${homeURL}
+    done
   '';
 
   swayConfig = pkgs.writeText "sway-kiosk-config" ''
