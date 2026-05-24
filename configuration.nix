@@ -43,25 +43,20 @@ in
   };
   boot.plymouth = {
     enable = true;
-    # theme = "catpuccin-frappe";
-    # theme = "details";
-    # theme = "fade-in";
-    # theme = "glow";
     # theme = "script";
     # theme = "solar";
-    # theme = "spinfinity";
+    theme = "spinfinity";
     # theme = "spinner";
-    # theme = "text";
-    # theme = "tribar";
-    # logo = ./resources/funnyPenguin.png; # must be a png
+    logo = ./resources/funnyPenguin.png; # must be a png
   };
   boot.kernelParams = [
     "quiet"
-    "udev.log_level=3"
-    "systemd.show_status=auto"
+    "splash"
+    # "udev.log_level=3"
+    # "systemd.show_status=auto"
   ];
-  boot.initrd.verbose = false;
-  boot.consoleLogLevel = 0;
+  # boot.initrd.verbose = false;
+  # boot.consoleLogLevel = 0;
 
   time.timeZone = "America/New_York";
 
