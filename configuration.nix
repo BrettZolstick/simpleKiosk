@@ -43,10 +43,17 @@ in
   };
   boot.plymouth = {
     enable = true;
-    theme = "bgrt";
+    # theme = "script";
+    theme = "solar";
+    # theme = "spinfinity";
+    # theme = "spinner";
+    logo = ./resources/funnyPenguin.png; # must be a png
   };
+  boot.kernelParams = [
+    "quiet"
+    "splash"
+  ];
   boot.initrd.verbose = false;
-  boot.consoleLogLevel = 0;
 
   time.timeZone = "America/New_York";
 
