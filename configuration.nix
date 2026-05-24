@@ -43,8 +43,8 @@ in
   };
   boot.plymouth = {
     enable = true;
-    theme = "script";
-    # theme = "solar";
+    # theme = "script";
+    theme = "solar";
     # theme = "spinfinity";
     # theme = "spinner";
     logo = ./resources/funnyPenguin.png; # must be a png
