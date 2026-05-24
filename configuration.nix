@@ -44,8 +44,8 @@ in
   boot.plymouth = {
     enable = true;
     # theme = "script";
-    # theme = "solar";
-    theme = "spinfinity";
+    theme = "solar";
+    # theme = "spinfinity";
     # theme = "spinner";
     logo = ./resources/funnyPenguin.png; # must be a png
   };
@@ -56,7 +56,7 @@ in
     # "systemd.show_status=auto"
   ];
   # boot.initrd.verbose = false;
-  # boot.consoleLogLevel = 0;
+  boot.consoleLogLevel = 0;
 
   time.timeZone = "America/New_York";
 
