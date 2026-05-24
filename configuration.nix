@@ -55,8 +55,8 @@ in
     # "udev.log_level=3"
     # "systemd.show_status=auto"
   ];
-  # boot.initrd.verbose = false;
-  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
+  # boot.consoleLogLevel = 0;
 
   time.timeZone = "America/New_York";
 
