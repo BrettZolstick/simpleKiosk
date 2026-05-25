@@ -47,7 +47,7 @@ in
     theme = "solar";
     # theme = "spinfinity";
     # theme = "spinner";
-    logo = ./resources/funnyPenguin.png; # must be a png
+    logo = ./resources/logo.png; # must be a png
   };
   boot.kernelParams = [
     "quiet"
