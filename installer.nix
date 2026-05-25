@@ -77,8 +77,6 @@ let
   
       Write-Host "Installing NixOS" -ForegroundColor Cyan
       nixos-install --flake github:BrettZolstick/simpleKiosk#kiosk --impure --no-root-password 
-
-      Read-Host
   }
 
   function PromptReboot {
@@ -88,7 +86,7 @@ let
       Write-Host "NixOS has been sucessfully installed" -ForegroundColor Cyan
       Write-Host "Press Enter to reboot, then unplug the USB." -ForegroundColor Yellow -NoNewline
       Read-Host
-    
+      reboot
   }
 
 
