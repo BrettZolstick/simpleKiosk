@@ -21,7 +21,7 @@
 
 
   # Homepage URL
-  homepage = "nixos.org"; 
+  homepage = "https://nixos.org/"; # must be full URL 
 
 
   # You can block/allow sites here
