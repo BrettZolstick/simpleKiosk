@@ -3,18 +3,22 @@
   
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
-  outputs = { self, nixpkgs }: {
-    
+  outputs = { self, nixpkgs }:
+  let
+    basicConfig = import ./kioskConfig/basicConfig.nix {lib = nixpkgs.lib;};
+  in
+  {
+   
     nixosConfigurations.installer = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-        ./installer.nix
+        ./installerConfig/installer.nix
         {
           isoImage.contents = [
             {
               source = ./.;
-              target = "/simpleKiosk";
+              target = "/${basicConfig.projectName}";
             }
           ];
         }
@@ -25,7 +29,7 @@
     nixosConfigurations.kiosk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./kioskConfig/advancedConfig.nix
         ];
         
     };

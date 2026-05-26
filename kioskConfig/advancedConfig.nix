@@ -1,9 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  homeURL = "https://museum.lingscars.com"; # the page the kiosk load
-  idleTimeout = "10";
-  repo = "BrettZolstick/simpleKiosk";
-
+  basicConfig = import ./basicConfig.nix {inherit lib;}; 
   
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
     while true; do
@@ -16,7 +13,7 @@ let
       --start-fullscreen \
       --incognito \
       --kiosk \
-      --app=${homeURL}
+      --app=${basicConfig.homepage}
     done
   '';
 
@@ -26,7 +23,7 @@ let
     default_floating_border none
     seat * hide_cursor 3000
     exec ${startKiosk}
-    exec swayidle -w timeout ${idleTimeout} 'swaymsg "output * power off"' resume 'pkill chromium; swaymsg "output * power on"'
+    exec swayidle -w timeout ${basicConfig.idleTimeout} 'swaymsg "output * power off"' resume 'pkill chromium; swaymsg "output * power on"'
   '';
 
 
@@ -50,7 +47,7 @@ in
     theme = "solar";
     # theme = "spinfinity";
     # theme = "spinner";
-    logo = ./resources/logo.png; # must be a png
+    logo = basicConfig.startupSplashLogo; # must be a png
   };
   boot.kernelParams = [
     "quiet"
@@ -80,10 +77,8 @@ in
 
   # Set Chrome URL Whitelist
   environment.etc."chromium/policies/managed/kiosk-policy.json".text = builtins.toJSON {
-    URLBlocklist = [ "*" ];
-    URLAllowlist = [
-      "*"
-    ];
+    URLBlocklist = basicConfig.urlBlacklist;
+    URLAllowlist = basicConfig.urlWhitelist;
   };
   
   users.users.kiosk = {
@@ -110,7 +105,7 @@ in
 
 
   environment.shellAliases = {
-    kiosk-update = "nixos-rebuild switch --flake github:${repo}#kiosk --impure --refresh";
+    kiosk-update = "nixos-rebuild switch --flake github:${basicConfig.githubRepo}#kiosk --impure --refresh";
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];

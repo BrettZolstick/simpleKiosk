@@ -1,5 +1,7 @@
 {pkgs, lib, ...}:
 let
+  basicConfig = import ../kioskConfig/basicConfig.nix {inherit lib;};
+  
   KioskInstallScript = pkgs.writeText "pwshInstallKiosk.ps1" ''
     function SelectDisk {
       Clear-Host
@@ -68,7 +70,7 @@ let
       New-Item -ItemType Directory -Path "/mnt/etc/nixos"
 
       Write-Host "Making a local copy of the simpleKiosk repo" -ForegroundColor Cyan
-      Copy-Item -Path "/iso/simpleKiosk" -Destination "/mnt/etc/nixos/simpleKiosk" -Recurse -Force
+      Copy-Item -Path "/iso/${basicConfig.projectName}" -Destination "/mnt/etc/nixos/${basicConfig.projectName}" -Recurse -Force
 
       Write-Host "Generating hardware-configuration.nix" -ForegroundColor Cyan
       nixos-generate-config --root /mnt --dir /mnt/etc/nixos
@@ -76,7 +78,7 @@ let
       # ^^ (the currently booted environment needs a hardware-configuration.nix to run nixos-install)
   
       Write-Host "Installing NixOS" -ForegroundColor Cyan
-      nixos-install --flake github:BrettZolstick/simpleKiosk#kiosk --impure --no-root-password 
+      nixos-install --flake github:${basicConfig.githubRepo}#kiosk --impure --no-root-password 
   }
 
   function PromptReboot {
