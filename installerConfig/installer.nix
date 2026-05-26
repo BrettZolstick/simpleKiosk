@@ -108,7 +108,6 @@ let
   
 in
 {
-  import = 
 
   # Enable auto login as root
   services.getty.autologinUser = lib.mkForce "root";
