@@ -55,14 +55,29 @@ dd if=./result/iso/nixos-minimal-*-x86_64-linux.iso of=/dev/<Drive Name> bs=4M s
 * Use [Rufus](https://rufus.ie/en/) in dd mode
 
 ## Changing the configuration
-TBD
 
-## Help
+* Most of the changes that you'll want to make are probably in **./kioskConfig/basicConfig.nix**. Please refer to the comments in this file for instruction. It should be pretty self explanitory.
 
-TBD
+* Because the installer pulls directly from the selected github repo, If you want to make changes to your own config, please [fork this repo.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) You will need to point the config at your own repo by changing the value in ./kioskConfig/basicConfig.nix
+
+* For more advanced changes to the kiosk, see ./kioskConfig/advancedConfig.nix. If you're familar with NixOS already, then you can make whatever changes you want here. Otherwise I reccomend the following learning resources.
+    * [NixOS Options Search](https://search.nixos.org/options)
+    * [NixOS Package Search](https://search.nixos.org/packages)
+    * [NixOS Wiki](https://wiki.nixos.org/wiki/NixOS_Wiki)
+    * [NixOS and Flakes guide](https://nixos-and-flakes.thiscute.world/)
+    * [Vimjoyer's github](https://github.com/vimjoyer) and [Youtube Channel](https://www.youtube.com/@vimjoyer)
+    * [Tony's github](https://github.com/tonybanters) and [Youtube Channel](https://www.youtube.com/@tony-btw)
+    * [The Unofficial NixOS Discord](https://discord.com/invite/RbvHtGa)
+    * Good old ChatGPT
+
+    Also feel free to raise an [issue](https://github.com/BrettZolstick/simpleKiosk/issues) or make a post in [discussions](https://github.com/BrettZolstick/simpleKiosk/discussions) and I'll help out where I can.
+
+
+
+
 ## Acknowledgments
 
-* Linux
-* NixOS
-* Sway
-* Plymouth
+* [Linux](https://github.com/torvalds/linux)
+* [NixOS](https://github.com/NixOS)
+* [Sway](https://github.com/swaywm/sway)
+* [Plymouth](https://gitlab.freedesktop.org/plymouth/plymouth)
