@@ -21,7 +21,7 @@
 
 
   # Homepage URL
-  homepage = "www.youtube.com"; 
+  homepage = "nixos.org"; 
 
 
   # You can block/allow sites here
