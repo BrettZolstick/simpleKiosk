@@ -1,6 +1,6 @@
 {
   # Repo to pull the config from ("<username>/<repo>/<branch (optional)>")
-  githubRepo = "BrettZolstick/simpleKiosk";
+  githubRepo = "BrettZolstick/simpleKiosk/restructure";
 
 
   # Time in seconds before the kiosk resets itself when idle
