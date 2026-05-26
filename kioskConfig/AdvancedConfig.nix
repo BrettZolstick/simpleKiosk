@@ -13,7 +13,7 @@ let
       --start-fullscreen \
       --incognito \
       --kiosk \
-      --app=${homeURL}
+      --app=${basicConfig.homepage}
     done
   '';
 
@@ -47,7 +47,7 @@ in
     theme = "solar";
     # theme = "spinfinity";
     # theme = "spinner";
-    logo = ./resources/logo.png; # must be a png
+    logo = basicConfig.startupSplashLogo; # must be a png
   };
   boot.kernelParams = [
     "quiet"

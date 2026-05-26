@@ -1,5 +1,7 @@
 {pkgs, lib, ...}:
 let
+  basicConfig = import ../kioskConfig/basicConfig.nix;
+  
   KioskInstallScript = pkgs.writeText "pwshInstallKiosk.ps1" ''
     function SelectDisk {
       Clear-Host
@@ -76,7 +78,7 @@ let
       # ^^ (the currently booted environment needs a hardware-configuration.nix to run nixos-install)
   
       Write-Host "Installing NixOS" -ForegroundColor Cyan
-      nixos-install --flake github:BrettZolstick/simpleKiosk#kiosk --impure --no-root-password 
+      nixos-install --flake github:${basicConfig.githubRepo}#kiosk --impure --no-root-password 
   }
 
   function PromptReboot {
@@ -106,6 +108,7 @@ let
   
 in
 {
+  import = 
 
   # Enable auto login as root
   services.getty.autologinUser = lib.mkForce "root";
