@@ -1,6 +1,6 @@
 {lib, ... }: rec{
   # Repo to pull the config from ("<username>/<repo>/<branch (optional)>")
-  githubRepo = "BrettZolstick/simpleKiosk/restructure";
+  githubRepo = "BrettZolstick/simpleKiosk";
   projectName = builtins.elemAt (lib.splitString "/" githubRepo) 1; 
 
 
