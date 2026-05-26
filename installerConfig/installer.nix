@@ -70,7 +70,7 @@ let
       New-Item -ItemType Directory -Path "/mnt/etc/nixos"
 
       Write-Host "Making a local copy of the simpleKiosk repo" -ForegroundColor Cyan
-      Copy-Item -Path "/iso/simpleKiosk" -Destination "/mnt/etc/nixos/simpleKiosk" -Recurse -Force
+      Copy-Item -Path "/iso/${basicConfig.projectName}" -Destination "/mnt/etc/nixos/${basicConfig.projectName}" -Recurse -Force
 
       Write-Host "Generating hardware-configuration.nix" -ForegroundColor Cyan
       nixos-generate-config --root /mnt --dir /mnt/etc/nixos
