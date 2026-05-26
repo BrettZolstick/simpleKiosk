@@ -2,6 +2,9 @@
 let
   homeURL = "https://museum.lingscars.com"; # the page the kiosk load
   idleTimeout = "10";
+  repo = "BrettZolstick/simpleKiosk";
+
+  
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
     while true; do
       ${pkgs.chromium}/bin/chromium \
@@ -107,7 +110,7 @@ in
 
 
   environment.shellAliases = {
-    kiosk-update = "nixos-rebuild switch --flake github:BrettZolstick/simpleKiosk#kiosk --impure --refresh";
+    kiosk-update = "nixos-rebuild switch --flake github:${repo}#kiosk --impure --refresh";
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
