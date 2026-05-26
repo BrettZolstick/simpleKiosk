@@ -25,7 +25,6 @@
     nixosConfigurations.kiosk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./kioskConfig/basicConfig.nix
           ./kioskConfig/advancedConfig.nix
         ];
         
