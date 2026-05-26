@@ -15,13 +15,13 @@
   # 
   # You can make a hashed password with the following command:
   #   'nix shell nixpkgs#whois -c mkpasswd -m yescrypt <password>'
-  # enableRootLogin = true;
-  # enablePasswordlessRoot = true; 
+  enableRootLogin = true;
+  enablePasswordlessRoot = true; 
   rootHashedPassword = "$y$j9T$N0kLucrcTRCarwxMUadL51$ZeYxU/1PqPX.nPcLO/1da6Qgv4mEYlIGAXBFPrejewC";
 
 
   # Homepage URL
-  homepage = "museum.lingscars.com"; 
+  homepage = "www.youtube.com"; 
 
 
   # You can block/allow sites here
