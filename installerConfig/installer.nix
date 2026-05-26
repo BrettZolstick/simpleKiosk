@@ -1,6 +1,6 @@
 {pkgs, lib, ...}:
 let
-  basicConfig = import ../kioskConfig/basicConfig.nix;
+  basicConfig = import ../kioskConfig/basicConfig.nix {inherit lib;};
   
   KioskInstallScript = pkgs.writeText "pwshInstallKiosk.ps1" ''
     function SelectDisk {

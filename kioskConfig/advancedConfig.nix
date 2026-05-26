@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  basicConfig = import ./basicConfig.nix; 
+  basicConfig = import ./basicConfig.nix {inherit lib;}; 
   
   startKiosk = pkgs.writeShellScript "start-kiosk" ''
     while true; do

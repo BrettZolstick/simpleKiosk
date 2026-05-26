@@ -1,6 +1,7 @@
-{
+{lib, ... }: rec{
   # Repo to pull the config from ("<username>/<repo>/<branch (optional)>")
   githubRepo = "BrettZolstick/simpleKiosk/restructure";
+  projectName = builtins.elemAt (lib.splitString "/" githubRepo) 1; 
 
 
   # Time in seconds before the kiosk resets itself when idle
