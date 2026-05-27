@@ -46,6 +46,12 @@ in
   boot.kernelParams = [
     "quiet"
     "splash"
+    "loglevel=0"
+    "rd.systemd.show_status=false"
+    "systemd.show_status=false"
+    "rd.udev.log_level=0"
+    "udev.log_level=0"
+    "vt.global_cursor_default=0"
   ];
   boot.plymouth = {
     enable = true;
