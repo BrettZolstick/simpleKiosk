@@ -46,19 +46,16 @@ in
   boot.kernelParams = [
     "quiet"
     "splash"
-    "boot.shell_on_fail"
-    "loglevel=0"
-    "rd.systemd.show_status=false"
-    "rd.udev.log_level=0"
-    "udev.log_priority=0"
-    "vt.global_cursor_default=0"
+    # "boot.shell_on_fail"
+    # "loglevel=0"
+    # "rd.systemd.show_status=false"
+    # "rd.udev.log_level=0"
+    # "udev.log_priority=0"
+    # "vt.global_cursor_default=0"
   ];
   boot.plymouth = {
     enable = true;
-    # theme = "script";
     theme = "solar";
-    # theme = "spinfinity";
-    # theme = "spinner";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
   boot.consoleLogLevel = 0;
