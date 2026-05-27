@@ -44,14 +44,14 @@ in
     efiSysMountPoint = "/boot";
   };
   boot.kernelParams = [
-  "quiet"
-  "splash"
-  "boot.shell_on_fail"
-  "loglevel=0"
-  "rd.systemd.show_status=false"
-  "rd.udev.log_level=0"
-  "udev.log_priority=0"
-  "vt.global_cursor_default=0"
+    "quiet"
+    "splash"
+    "boot.shell_on_fail"
+    "loglevel=0"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=0"
+    "udev.log_priority=0"
+    "vt.global_cursor_default=0"
   ];
   boot.plymouth = {
     enable = true;
@@ -62,7 +62,9 @@ in
     logo = basicConfig.startupSplashLogo; # must be a png
   };
   boot.consoleLogLevel = 0;
-  
+  boot.initrd.systemd.enable = true;
+  boot.initrd.verbose = false;
+   
   time.timeZone = "America/New_York";
 
   networking.hostName = "kiosk";
