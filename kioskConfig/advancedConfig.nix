@@ -38,8 +38,6 @@ in
   boot.loader.systemd-boot = {
     enable = true;
     editor = false;
-    showStatus = false;
-    showCountdown = false;
   };
   boot.loader.efi = {
     canTouchEfiVariables = true;
