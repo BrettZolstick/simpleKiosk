@@ -54,9 +54,11 @@ in
     theme = "spinner";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
-
-
-  services.automatic-timezoned.enable  = true;
+  boot.consoleLogLevel = 0;
+  boot.initrd.systemd.enable = true;
+  boot.initrd.verbose = false;
+  
+  services.automatic-timezoned.enable = true;
 
   networking.hostName = "kiosk";
   networking.networkmanager.enable = true;
