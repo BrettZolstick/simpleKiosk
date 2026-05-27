@@ -27,7 +27,6 @@ let
   '';
 
 
-
 in
 {
   imports = [
@@ -47,9 +46,12 @@ in
     "quiet"
     "splash"
   ];
+  boot.consoleLogLevel = 0;
+  boot.initrd.systemd.enable = true;
+  boot.initrd.verbose = false;
   boot.plymouth = {
     enable = true;
-    theme = "solar";
+    theme = "spinner";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
   boot.consoleLogLevel = 0;
