@@ -46,9 +46,6 @@ in
     "quiet"
     "splash"
   ];
-  boot.consoleLogLevel = 0;
-  boot.initrd.systemd.enable = true;
-  boot.initrd.verbose = false;
   boot.plymouth = {
     enable = true;
     theme = "spinner";
