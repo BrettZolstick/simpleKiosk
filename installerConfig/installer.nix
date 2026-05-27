@@ -129,7 +129,10 @@ in
   services.getty.autologinUser = lib.mkForce "root";
   users.users.root.shell = pkgs.bashInteractive;
 
-  environment.systemPackages = [ InstallKiosk dosfstools ];
+  environment.systemPackages = with pkgs; [ 
+    InstallKiosk
+    dosfstools
+  ];
   
   programs.bash.loginShellInit = "install-kiosk";
  
