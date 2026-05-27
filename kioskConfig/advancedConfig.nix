@@ -35,12 +35,22 @@ in
   ];
 
   boot.loader.timeout = 0;
-  boot.loader.grub = {
+  boot.loader.systemd-boot = {
     enable = true;
-    device = "/dev/sda";
-    useOSProber = false;
-    timeoutStyle = "hidden";
+    editor = false;
   };
+  boot.loader.efi = {
+    canTouchEfiVariables = true;
+    efiSysMountPoint = "/boot";
+  };
+  boot.kernelParams = [
+    "quiet"
+    "splash"
+    "loglevel=3"
+    "udev.log_level=3"
+    "rd.udev.log_level=3"
+    "vt.global_cursor_default=0"
+  ];
   boot.plymouth = {
     enable = true;
     # theme = "script";
@@ -49,16 +59,6 @@ in
     # theme = "spinner";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
-  boot.kernelParams = [
-    "quiet"
-    "loglevel=0"
-    "udev.log_level=0"
-    "rd.udev.log_level=0"
-    "systemd.show_status=false"
-    "rd.systemd.show_status=false"
-  ];
-  boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
 
   time.timeZone = "America/New_York";
 

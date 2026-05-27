@@ -40,25 +40,41 @@ let
       Write-Host "Wiping File System" -ForegroundColor Cyan
       wipefs -a "/dev/$($disk.name)"
 
-      Write-Host "Making Primary Partition" -ForegroundColor Cyan
-      parted -s "/dev/$($disk.name)" mklabel msdos
-      parted -s "/dev/$($disk.name)" mkpart primary ext4 1MiB 100%
+      Write-Host "Making GPT Partition Table" -ForegroundColor Cyan
+      parted -s "/dev/$($disk.name)" mklabel gpt
+
+      Write-Host "Making EFI System Partition" -ForegroundColor Cyan
+      parted -s "/dev/$($disk.name)" mkpart ESP fat32 1MiB 513MiB
+      parted -s "/dev/$($disk.name)" set 1 esp on
+
+      Write-Host "Making Root Partition" -ForegroundColor Cyan
+      parted -s "/dev/$($disk.name)" mkpart primary ext4 513MiB 100%
 
       Write-Host "Re-scanning Disks" -ForegroundColor Cyan
       partprobe "/dev/$($disk.name)"
       udevadm settle
       Start-Sleep -Seconds 2
-    
-      Write-Host "Creating Filesystem" -ForegroundColor Cyan
+
       if ($disk.name -notLike "sd*") {
-          $root = "/dev/$($disk.name)p1"
+          $esp = "/dev/$($disk.name)p1"
+          $root = "/dev/$($disk.name)p2"
       } else {
-          $root = "/dev/$($disk.name)1"
+          $esp = "/dev/$($disk.name)1"
+          $root = "/dev/$($disk.name)2"
       }
+
+      Write-Host "Creating EFI Filesystem" -ForegroundColor Cyan
+      mkfs.fat -F 32 -n EFI $esp
+
+      Write-Host "Creating Root Filesystem" -ForegroundColor Cyan
       mkfs.ext4 -F -L nixos $root
 
       Write-Host "Mounting Root Partition" -ForegroundColor Cyan
-      mount $root /mnt    
+      mount $root /mnt
+
+      Write-Host "Mounting EFI System Partition" -ForegroundColor Cyan
+      New-Item -ItemType Directory -Path "/mnt/boot"
+      mount $esp /mnt/boot 
   }
 
   function InstallNixOS {
@@ -113,7 +129,7 @@ in
   services.getty.autologinUser = lib.mkForce "root";
   users.users.root.shell = pkgs.bashInteractive;
 
-  environment.systemPackages = [ InstallKiosk ];
+  environment.systemPackages = [ InstallKiosk dosfstools ];
   
   programs.bash.loginShellInit = "install-kiosk";
  
