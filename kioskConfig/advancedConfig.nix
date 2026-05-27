@@ -35,26 +35,27 @@ in
   ];
 
   boot.loader.timeout = 0;
-  boot.loader.grub = {
+  boot.loader.systemd-boot = {
     enable = true;
-    device = "/dev/sda";
-    useOSProber = false;
-    timeoutStyle = "hidden";
+    editor = false;
   };
-  boot.plymouth = {
-    enable = true;
-    # theme = "script";
-    theme = "solar";
-    # theme = "spinfinity";
-    # theme = "spinner";
-    logo = basicConfig.startupSplashLogo; # must be a png
+  boot.loader.efi = {
+    canTouchEfiVariables = true;
+    efiSysMountPoint = "/boot";
   };
   boot.kernelParams = [
     "quiet"
     "splash"
   ];
+  boot.plymouth = {
+    enable = true;
+    theme = "solar";
+    logo = basicConfig.startupSplashLogo; # must be a png
+  };
+  boot.consoleLogLevel = 0;
+  boot.initrd.systemd.enable = true;
   boot.initrd.verbose = false;
-
+   
   time.timeZone = "America/New_York";
 
   networking.hostName = "kiosk";
