@@ -55,8 +55,8 @@ in
   boot.consoleLogLevel = 0;
   boot.initrd.systemd.enable = true;
   boot.initrd.verbose = false;
-   
-  time.timeZone = "America/New_York";
+  
+  services.automatic-timezoned.enable;
 
   networking.hostName = "kiosk";
   networking.networkmanager.enable = true;
