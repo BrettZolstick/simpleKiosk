@@ -94,7 +94,7 @@ let
       # ^^ (the currently booted environment needs a hardware-configuration.nix to run nixos-install)
   
       Write-Host "Installing NixOS" -ForegroundColor Cyan
-      nixos-install --flake github:${basicConfig.githubRepo}#kiosk --impure --no-root-password 
+      nixos-install --flake /mnt/etc/nixos/${basicConfig.projectName}#kiosk --impure --no-root-password 
   }
 
   function PromptReboot {

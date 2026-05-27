@@ -104,9 +104,9 @@ in
 
 
 
-  environment.shellAliases = {
-    kiosk-update = "nixos-rebuild switch --flake github:${basicConfig.githubRepo}#kiosk --impure --refresh";
-  };
+  # environment.shellAliases = {
+  #   kiosk-update = "nixos-rebuild switch --flake github:${basicConfig.githubRepo}#kiosk --impure --refresh";
+  # };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
