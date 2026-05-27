@@ -38,6 +38,8 @@ in
   boot.loader.systemd-boot = {
     enable = true;
     editor = false;
+    showStatus = false;
+    showCountdown = false;
   };
   boot.loader.efi = {
     canTouchEfiVariables = true;
@@ -59,7 +61,8 @@ in
     # theme = "spinner";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
-
+  boot.consoleLogLevel = 0;
+  
   time.timeZone = "America/New_York";
 
   networking.hostName = "kiosk";
