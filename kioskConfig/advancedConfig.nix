@@ -56,7 +56,7 @@ in
   boot.initrd.systemd.enable = true;
   boot.initrd.verbose = false;
   
-  services.automatic-timezoned.enable;
+  services.automatic-timezoned.enable = true;
 
   networking.hostName = "kiosk";
   networking.networkmanager.enable = true;
