@@ -46,12 +46,12 @@ in
   boot.kernelParams = [
     "quiet"
     "splash"
-    "loglevel=0"
-    "rd.systemd.show_status=0"
-    "systemd.show_status=0"
-    "rd.udev.log_level=0"
-    "udev.log_level=0"
-    "vt.global_cursor_default=0"
+    # "loglevel=0"
+    # "rd.systemd.show_status=0"
+    # "systemd.show_status=0"
+    # "rd.udev.log_level=0"
+    # "udev.log_level=0"
+    # "vt.global_cursor_default=0"
   ];
   boot.consoleLogLevel = 0;
   boot.initrd.systemd.enable = true;
@@ -61,14 +61,14 @@ in
     theme = "solar";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
-  systemd.services.plymouth-quit = {
-    wantedBy = lib.mkForce [ "greetd.service" ];
-    before = [ "greetd.service" ];
-  };
-  systemd.services.greetd = {
-    wants = [ "plymouth-quit.service" ];
-    after = [ "plymouth-quit.service" ];
-  };
+  # systemd.services.plymouth-quit = {
+  #   wantedBy = lib.mkForce [ "greetd.service" ];
+  #   before = [ "greetd.service" ];
+  # };
+  # systemd.services.greetd = {
+  #   wants = [ "plymouth-quit.service" ];
+  #   after = [ "plymouth-quit.service" ];
+  # };
   
   services.automatic-timezoned.enable = true;
 
