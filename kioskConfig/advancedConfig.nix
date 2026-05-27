@@ -25,7 +25,6 @@ let
     exec ${startKiosk}
     exec swayidle -w timeout ${basicConfig.idleTimeout} 'swaymsg "output * power off"' resume 'pkill chromium; swaymsg "output * power on"'
   '';
-    # exec systemctl --no-block start plymouth-quit.service
 
 
 in
@@ -46,12 +45,6 @@ in
   boot.kernelParams = [
     "quiet"
     "splash"
-    # "loglevel=0"
-    # "rd.systemd.show_status=0"
-    # "systemd.show_status=0"
-    # "rd.udev.log_level=0"
-    # "udev.log_level=0"
-    # "vt.global_cursor_default=0"
   ];
   boot.consoleLogLevel = 0;
   boot.initrd.systemd.enable = true;
@@ -61,9 +54,6 @@ in
     theme = "spinner";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
-  # systemd.services.plymouth-quit.wantedBy = lib.mkForce [ ];
-
-
 
 
   services.automatic-timezoned.enable  = true;
