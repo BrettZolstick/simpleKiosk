@@ -15,6 +15,7 @@
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
         ./installerConfig/installer.nix
         {
+          boot.kernelParams = [ "nomodeset" ];
           isoImage.contents = [
             {
               source = ./.;
