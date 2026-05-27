@@ -51,8 +51,13 @@ in
   };
   boot.kernelParams = [
     "quiet"
-    "splash"
+    "loglevel=0"
+    "udev.log_level=0"
+    "rd.udev.log_level=0"
+    "systemd.show_status=false"
+    "rd.systemd.show_status=false"
   ];
+  boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
 
   time.timeZone = "America/New_York";
