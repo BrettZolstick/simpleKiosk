@@ -22,6 +22,7 @@ let
     default_border none
     default_floating_border none
     seat * hide_cursor 3000
+    exec systemctl --no-block start plymouth-quit.service
     exec ${startKiosk}
     exec swayidle -w timeout ${basicConfig.idleTimeout} 'swaymsg "output * power off"' resume 'pkill chromium; swaymsg "output * power on"'
   '';
@@ -61,16 +62,12 @@ in
     theme = "solar";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
-  # systemd.services.plymouth-quit = {
-  #   wantedBy = lib.mkForce [ "greetd.service" ];
-  #   before = [ "greetd.service" ];
-  # };
-  # systemd.services.greetd = {
-  #   wants = [ "plymouth-quit.service" ];
-  #   after = [ "plymouth-quit.service" ];
-  # };
-  
-  services.automatic-timezoned.enable = true;
+  systemd.services.plymouth-quit.wantedBy = lib.mkForce [ ];
+
+
+
+
+  services.automatic-timezoned.enable  = true;
 
   networking.hostName = "kiosk";
   networking.networkmanager.enable = true;
