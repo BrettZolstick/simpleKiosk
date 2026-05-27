@@ -61,14 +61,14 @@ in
     theme = "solar";
     logo = basicConfig.startupSplashLogo; # must be a png
   };
-  # systemd.services.plymouth-quit = {
-  #   wantedBy = lib.mkForce [ "greetd.service" ];
-  #   before = [ "greetd.service" ];
-  # };
-  # systemd.services.greetd = {
-  #   wants = [ "plymouth-quit.service" ];
-  #   after = [ "plymouth-quit.service" ];
-  # };
+  systemd.services.plymouth-quit = {
+    wantedBy = lib.mkForce [ "greetd.service" ];
+    before = [ "greetd.service" ];
+  };
+  systemd.services.greetd = {
+    wants = [ "plymouth-quit.service" ];
+    after = [ "plymouth-quit.service" ];
+  };
   
   services.automatic-timezoned.enable = true;
 
